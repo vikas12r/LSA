@@ -1,1 +1,50 @@
 
+To enable SSH password authentication, you must SSH in as root to edit this file:
+
+/etc/ssh/sshd_config
+Then, change the line
+
+PasswordAuthentication no
+to
+PasswordAuthentication yes
+
+After making that change, restart the SSH service by running the following command as root:
+
+sudo service ssh restart
+
+#To check if the client is available on your Linux-based system, you will need to:
+
+Load an SSH terminal. You can either search for “terminal” or press CTRL + ALT + T on your keyboard.
+Type in ssh and press Enter in the terminal.
+If the client is installed, you will receive a response that looks like this:
+username@host:~$ ssh
+
+Run the following command to install the OpenSSH client on your computer:
+ sudo apt-get install openssh-client
+
+you will need to install the OpenSSH server. Leave the terminal open and:
+
+Run the following command to install the SSH server:
+sudo apt-get install openssh-server ii.
+Type in your superuser password when asked.
+Enter and Y to allow the installation to continue after the disk space prompt.
+The required support files will be installed, and then you can check if the SSH server is running on the machine by typing this command:
+
+sudo service ssh status
+
+Now edit the SSH daemon configuration file, for example, you can change the default port for SSH connections.
+ sudo nano /etc/ssh/sshd_config
+
+The configuration file will open in the editor of your choice. In this case, we used Nano.
+
+If you need to install Nano, run this command:
+
+sudo apt-get install nano
+We need to restart SSH service every time we make any changes to the sshd_config file:
+
+sudo service ssh restart
+Open the SSH terminal on your machine and run the following command:
+ssh your_username@host_ip_address
+If the username on your local machine matches the one on the server you are trying to connect to, you can just type:
+ssh host_ip_address
+
