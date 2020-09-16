@@ -1,1 +1,130 @@
 
+Aim:.Initial settings: Add a User, 
+Network Settings, 
+Change to static IP address, 
+Disable IPv6 if not needed,
+Configure Services,
+display the list of services 
+which are running,
+Stop and turn OFF auto-start
+setting for a service if you don’t need it, 
+Sudo Settings 
+
+
+A. Add user 
+The add user command is used for user account
+for system admin tasks on Ubuntu.
+
+Command for adduser
+
+$sudo adduser user_name
+
+
+B. Network setting 
+network settings is essential when installing
+an ubuntu server It is  useful for troubleshooting
+problems with your Internet connection.  
+In Ubuntu, to set an IP address through terminal commands.
+First type netstat –I to find the interface name. 
+Then type the below command:
+
+sudo ifconfig eth0 192.168.72.6 
+netmask 255.255.255.0
+
+Then to add a default gateway,
+add the below command:
+
+sudo route add default gw
+192.168.72.1 eth0
+
+
+
+C. Configure service 
+
+Systemd
+
+sudo systemctl status –shows status of all services on server
+
+sudo systemctl status apache2 – shows status of specific service
+
+sudo systemctl start/restart/stop apache2 – start/stop restart service
+Service
+
+sudo service —status-all | less – shows status of services and allows you to scroll through results.
+
+sudo service apache2 status/start/stop/restart – to manage services
+Init.d 
+
+sudo /etc/init.d/apache2 status/start/restart/stop – to manage services
+
+
+
+D. display the list of services which are running 
+
+the systemctl command ,it will display a list of all 
+loaded systemd units including services, showing their 
+status ( active or not).
+To list all loaded services on  system (whether active; 
+running, exited or failed, use the list-units subcommand 
+and --type switch with a value of service.
+
+systemctl list-units --type=service
+
+OR
+
+systemctl --type=service
+
+
+
+
+E. Change to static ip address
+1. To setup static IP address in Debian
+$ nano /etc/network/interfaces
+Output:
+auto eth0
+iface eth0 inet dhcp 
+
+Change it so it looks like this:
+auto eth0
+iface eth0 inet static 
+  address 192.168.0.100
+  netmask 255.255.255.0
+  gateway 192.168.0.1
+  dns-nameservers 4.4.4.4
+  dns-nameservers 8.8.8.8
+  
+2. Save the file and then edit /etc/resolv.conf like this:
+# nano /etc/resolv.conf
+nameserver 8.8.8.8 # Replace with your nameserver ip
+nameserver 4.4.4.4 # Replace with your nameserver ip
+3. Restart the networking on your system with:
+$ /etc/init.d/network restart  [On SysVinit]
+$ systemctl restart network    [On SystemD]
+
+F.Disable ipv6 
+
+to disable the protocol on a Debian-based machine.
+
+1. Open a terminal window.
+
+2. Issue the command sudo nano /etc/sysctl.conf
+
+3. Add the following at the bottom of the file:
+
+net.ipv6.conf.all.disable_ipv6 = 1
+
+net.ipv6.conf.default.disable_ipv6 = 1
+
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+G.Sudo Setting
+] Sudo Setting
+ It is mainly used for provide commands execution right
+for any user or group.
+Only root user has execution right for all
+commands .
+But normal user have limited commands execution rights
+
+To edit sudo configuration file use:
+  $ visudo
+
