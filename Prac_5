@@ -1,4 +1,5 @@
 Practical
+Aim Instal Samba to share folders or files between Windows and linux.
 Steps 1: To install Samba, we run:
 $ sudo apt update
 $ sudo apt-get –y  install samba
